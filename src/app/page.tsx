@@ -1,9 +1,12 @@
 export default function Games() {
     return (
-        <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-zinc-100">Games</h2>
-            </div>
+
+        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+                <h1 className="text-6xl font-bold">
+                    Welcome to <a className="text-purple-600" href="/games">My Games Collection!</a>
+                </h1>
+            </main>
         </div>
     );
 }
