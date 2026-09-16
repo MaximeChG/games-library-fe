@@ -101,6 +101,20 @@ export type GameConsoleDetails = {
     gameId: string, // Id of the game in the Game collection    
 };
 
+// Lets Map the interest levels to a numeric value and a color for display purposes
+export const INTEREST_CONFIG: Record<Interest, { label: string; color: string; weight: number }> = {
+    'must-play': { label: 'Must Play', color: 'text-red-500', weight: 5 },
+    'very-interested': { label: 'Very Interested', color: 'text-yellow-500', weight: 4 },
+    'interested': { label: 'Interested', color: 'text-green-500', weight: 3 },
+    'not-interested': { label: 'Not Interested', color: 'text-gray-500', weight: 2 },
+    'na': { label: 'N/A', color: 'text-gray-500', weight: 1 },
+    'little-interested': {
+        label: 'Little Interested',
+        color: 'text-blue-500',
+        weight: 0
+    }
+};
+
 // Map colors and icons structurally to State of Play categories
 export const STATE_CONFIG: Record<PlayState, { label: string; bg: string; text: string; dot: string; icon: LucideIcon }> = {
     playing: {
