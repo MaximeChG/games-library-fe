@@ -1,6 +1,31 @@
-export type PlayState = 'playing' | 'backlog' | 'paused' | 'completed' | 'dropped' | 'finished' | 'na';
+export type PlayState =
+    | 'playing'
+    | 'backlog'
+    | 'paused'
+    | 'completed'
+    | 'dropped'
+    | 'finished'
+    | 'na';
 
-export type Interest = 'must-play' | 'very-interested' | 'interested' | 'little-interested' | 'not-interested' | 'na';
+export const playStateCompletionWeight: Record<PlayState, number> = {
+    playing: 4,
+    backlog: 0,
+    paused: 3,
+    completed: 6,
+    dropped: 2,
+    finished: 5,
+    na: 1,
+};
+
+export type Interest =
+    | 'must-play'
+    | 'very-interested'
+    | 'interested'
+    | 'little-interested'
+    | 'not-interested'
+    | 'na';
+
+export type OwnedState = 'physical' | 'digital' | 'emulator' | 'wishlist';
 
 export type GameConsoles = [
     { key: 'steam', value: "Steam" },
@@ -15,6 +40,7 @@ export type GameConsoles = [
     { key: 'wii', value: "Wii" },
     { key: 'wiiU', value: "Wii U" },
     { key: 'switch', value: "Switch" },
+    { key: 'switch2', value: "Switch 2" },
     { key: 'switchO', value: "Switch Online" },
     { key: 'gb', value: "GameBoy" },
     { key: 'gbc', value: "GameBoy Color" },
@@ -34,20 +60,25 @@ export type GameConsoles = [
 
     { key: 'xbox', value: "Xbox" },
     { key: 'xbox360', value: "Xbox 360" },
-
-    { key: 'emulator', value: "Emulator" },
 ];
 
-export type LocalGame = {
+export type Game = {
         _id?: string
         title: string,
         sortTitle: string,
-        progress: string,
-        progressDescription: string | undefined,
-        consoles: string[],
+        genre: string,
         image: string,
-        playedTimes: number,
-        releaseYear: number,
-        interest: string,
-        addedDate: Date    
+        interest: Interest,
+};
+
+export type GameDetails = {
+    _id?: string,
+    console: string,
+    ownedState: OwnedState,
+    progress: PlayState,
+    progressDescription: string | undefined,
+    releaseYear: number,
+    addedDate: Date,
+    modifiedDate: Date,
+    gameId: string, // Id of the game in the Game collection    
 };
