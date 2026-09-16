@@ -1,3 +1,6 @@
+import { CheckCircle2, Heart, History, Pause, Play, SlidersHorizontal, XCircle } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+
 export type PlayState =
     | 'playing'
     | 'backlog'
@@ -99,61 +102,61 @@ export type GameConsoleDetails = {
 };
 
 // Map colors and icons structurally to State of Play categories
-export const STATE_CONFIG: Record<PlayState, { label: string; bg: string; text: string; dot: string; icon: React.ReactNode }> = {
+export const STATE_CONFIG: Record<PlayState, { label: string; bg: string; text: string; dot: string; icon: LucideIcon }> = {
     playing: {
         label: 'Currently Playing',
         bg: 'bg-violet-500/10',
         text: 'text-violet-400',
         dot: 'bg-violet-400',
-        icon: '<Play className="w-3.5 h-3.5" />'
+        icon: Play
     },
     backlog: {
         label: 'Backlog',
         bg: 'bg-zinc-500/10',
         text: 'text-zinc-400',
         dot: 'bg-zinc-500',
-        icon: '<History className="w-3.5 h-3.5" />'
+        icon: History
     },
     paused: {
         label: 'On Hold',
         bg: 'bg-amber-500/10',
         text: 'text-amber-400',
         dot: 'bg-amber-400',
-        icon: '<Pause className="w-3.5 h-3.5" />'
+        icon: Pause
     },
     completed: {
         label: 'Completed',
         bg: 'bg-emerald-500/10',
         text: 'text-emerald-400',
         dot: 'bg-emerald-400',
-        icon: '<CheckCircle2 className="w-3.5 h-3.5" />'
+        icon: CheckCircle2
     },
     dropped: {
         label: 'Dropped',
         bg: 'bg-rose-500/10',
         text: 'text-rose-400',
         dot: 'bg-rose-400',
-        icon: '<XCircle className="w-3.5 h-3.5" />'
+        icon: XCircle
     },
     finished: {
         label: 'Finished',
         bg: 'bg-emerald-500/10',
         text: 'text-emerald-400',
         dot: 'bg-emerald-400',
-        icon: '<CheckCircle1 className="w-3.5 h-3.5" />'
+        icon: CheckCircle2
     },
     na: {
         label: 'N/A',
         bg: 'bg-zinc-500/10',
         text: 'text-zinc-400',
         dot: 'bg-zinc-500',
-        icon: '<SlidersHorizontal className="w-3.5 h-3.5" />'
+        icon: SlidersHorizontal
     },
     wishlist: {
         label: 'Wishlist',
         bg: 'bg-blue-500/10',
         text: 'text-blue-400',
         dot: 'bg-blue-400',
-        icon: '<Heart className="w-3.5 h-3.5" />'
+        icon: Heart
     }
 };

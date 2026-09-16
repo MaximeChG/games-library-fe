@@ -1,4 +1,4 @@
-import { PLAY_STATES, PlayState, STATE_CONFIG } from "@/src/types/games";
+import { PlayState, STATE_CONFIG } from "@/src/types/games";
 
 interface FilterProps {
   FilterArray: PlayState[];
@@ -6,17 +6,17 @@ interface FilterProps {
 
 export default function Filter({ FilterArray }: FilterProps) {
     return (
-        <div className="flex flex-wrap items-center gap-1.5 bg-zinc-900/40 p-1.5 border border-zinc-800/80 rounded-xl overflow-x-auto">
+        <div className="flex flex-wrap items-center gap-1 rounded-xl bg-zinc-950/70 p-1">
             <button 
             key="all"
-            className="px-3 py-1.5 text-sm font-medium text-zinc-300 hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-md"
+          className="rounded-lg px-3 py-2 text-xs font-semibold text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
             >
               All Games
         </button>
           {FilterArray.map((tab) => (
             <button
               key={tab}
-              className="px-3 py-1.5 text-sm font-medium text-zinc-300 hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-md"
+              className="rounded-lg px-3 py-2 text-xs font-semibold text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
             >
               {STATE_CONFIG[tab].label}
             </button>

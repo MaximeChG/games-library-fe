@@ -1,8 +1,7 @@
 'use client';
-
 import React, { useState, useMemo } from 'react';
 import { LayoutGrid, List, Search, Play, Pause, CheckCircle2, History, XCircle, SlidersHorizontal, ArrowUpRight } from 'lucide-react';
-import type { PlayState } from '../../types/games.ts';
+import { PLAY_STATES, PlayState, STATE_CONFIG, } from "@/src/types/games";
 
 // Define strict types for the Game status mapping
 
@@ -72,17 +71,6 @@ const MOCK_GAMES: Game[] = [
   },
 ];
 
-// Map colors and icons structurally to State of Play categories
-const STATE_CONFIG: Record<PlayState, { label: string; bg: string; text: string; dot: string; icon: React.ReactNode }> = {
-  playing: { label: 'Currently Playing', bg: 'bg-violet-500/10', text: 'text-violet-400', dot: 'bg-violet-400', icon: <Play className="w-3.5 h-3.5" /> },
-  backlog: { label: 'Backlog', bg: 'bg-zinc-500/10', text: 'text-zinc-400', dot: 'bg-zinc-500', icon: <History className="w-3.5 h-3.5" /> },
-  paused: { label: 'On Hold', bg: 'bg-amber-500/10', text: 'text-amber-400', dot: 'bg-amber-400', icon: <Pause className="w-3.5 h-3.5" /> },
-  completed: { label: 'Completed', bg: 'bg-emerald-500/10', text: 'text-emerald-400', dot: 'bg-emerald-400', icon: <CheckCircle2 className="w-3.5 h-3.5" /> },
-  dropped: { label: 'Dropped', bg: 'bg-rose-500/10', text: 'text-rose-400', dot: 'bg-rose-400', icon: <XCircle className="w-3.5 h-3.5" /> },
-  finished: { label: 'Finished', bg: 'bg-emerald-500/10', text: 'text-emerald-400', dot: 'bg-emerald-400', icon: <CheckCircle2 className="w-3.5 h-3.5" /> },
-  na: { label: 'N/A', bg: 'bg-zinc-500/10', text: 'text-zinc-400', dot: 'bg-zinc-500', icon: <SlidersHorizontal className="w-3.5 h-3.5" /> },
-};
-
 export default function AllGamesList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<PlayState | 'all'>('all');
@@ -114,17 +102,27 @@ export default function AllGamesList() {
 
         {/* Filtering Tabs */}
         <div className="flex flex-wrap items-center gap-1.5 bg-zinc-900/40 p-1.5 border border-zinc-800/80 rounded-xl overflow-x-auto">
-          {(['all', 'playing', 'backlog', 'paused', 'completed', 'dropped', 'na', 'finished'] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg capitalize transition whitespace-nowrap ${
-                activeTab === tab 
+          <button
+            onClick={() => setActiveTab('all')}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg capitalize transition whitespace-nowrap ${
+                activeTab === 'all' 
                   ? 'bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700' 
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60'
               }`}
             >
-              {tab === 'all' ? 'All Games' : STATE_CONFIG[tab].label}
+              All Games
+            </button>
+          {PLAY_STATES.map((tab) => (
+            <button
+              key={tab} 
+              onClick={() => setActiveTab(tab)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg capitalize transition whitespace-nowrap ${
+                activeTab === tab
+                  ? 'bg-zinc-800 text-zinc-100 shadow-sm border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60'
+              }`}
+            >
+              {STATE_CONFIG[tab].label}
             </button>
           ))}
         </div>
@@ -143,6 +141,7 @@ export default function AllGamesList() {
         <div className="border border-zinc-800 bg-zinc-900/10 rounded-xl overflow-hidden divide-y divide-zinc-800/80">
           {filteredGames.map((game) => {
             const config = STATE_CONFIG[game.playState];
+            const Icon = config.icon;
             return (
               <div 
                 key={game.id} 
@@ -167,7 +166,7 @@ export default function AllGamesList() {
                 {/* Center Left: Dynamic State Pill */}
                 <div className="flex items-center md:w-1/6">
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border border-white/5 ${config.bg} ${config.text}`}>
-                    {config.icon}
+                    <Icon className="h-3.5 w-3.5" />
                     <span>{config.label}</span>
                   </span>
                 </div>

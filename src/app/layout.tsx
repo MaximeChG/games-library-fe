@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Dashboard",
-  description: "Dashboard for tracking the most relevant data to the user",
+  title: "My Games Library",
+  description: "A library of games tracking collection progress, list, interest and reviews.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
