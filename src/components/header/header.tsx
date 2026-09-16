@@ -15,6 +15,7 @@ export default function Header({ PageName }: HeaderProps) {
               <NavItem label="Games" href="/games" />
               <NavItem label="Lists" href="/lists" />
               <NavItem label="Reviews" href="/reviews" />
+              <NavItem label="Design" href="/design" />
             </ul>
           </nav>
         </header>
