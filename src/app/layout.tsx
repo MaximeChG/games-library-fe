@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Games Collection",
-  description: "Games collection app for tracking game progress and completion",
+  title: "My Dashboard",
+  description: "Dashboard for tracking the most relevant data to the user",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-gray-900 text-purple-400">
-        <Header PageName="My Games Collection" />
+        <Header PageName="My Dashboard" />
         {children}
       </body>
     </html>

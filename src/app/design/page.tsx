@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { LayoutGrid, List, Search, Play, Pause, CheckCircle2, History, XCircle, SlidersHorizontal, ArrowUpRight } from 'lucide-react';
-import type { PlayState } from '../../types/games';
+import type { PlayState } from '../../types/games.ts';
 
 // Define strict types for the Game status mapping
 
@@ -98,12 +98,6 @@ export default function AllGamesList() {
   return (
     <div className="w-full space-y-6 text-zinc-100 p-6 bg-zinc-950 min-h-screen">
       
-      {/* 1. Header Area */}
-      <div className="border-b border-zinc-800/80 pb-5">
-        <h2 className="text-xl font-bold tracking-tight">Your Collection</h2>
-        <p className="text-xs text-zinc-400">Manage and track your active state of play line items.</p>
-      </div>
-
       {/* 2. Search & Filter Bar Toolbar */}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         {/* Search Input */}
