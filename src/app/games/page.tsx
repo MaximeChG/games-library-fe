@@ -1,12 +1,15 @@
+'use server';
+
+import { GetGames } from "@/src/api/games";
 import Filter from "@/src/components/common/filter";
 import Search from "@/src/components/common/search";
 import GameRow from "@/src/components/games/game-row";
-import { PLAY_STATES } from "@/src/types/games";
+import { Game, PLAY_STATES } from "@/src/types/games";
 import { MOCK_GAMES } from "@/src/util/data";
 import { SlidersHorizontal } from "lucide-react";
 
-export default function Games() {
-
+export default async function Games() {
+    const games: Game[] = await GetGames();
 
     return (
         <main className="min-h-screen w-full bg-zinc-950 px-4 py-6 text-zinc-100 sm:px-6 lg:px-8">
@@ -27,16 +30,16 @@ export default function Games() {
                 {/* Filtering Tabs */}
                 <Filter FilterArray={PLAY_STATES} />
                 </div>
-            {MOCK_GAMES.length === 0 && (
+            {games.length === 0 && (
                 <div className="rounded-2xl border border-dashed border-zinc-800 py-20 text-center">
                     <SlidersHorizontal className="mx-auto mb-3 h-7 w-7 text-zinc-600" />
                     <p className="text-sm text-zinc-400">No games matched your active view criteria.</p>
                 </div>
             )}
 
-            {MOCK_GAMES.length > 0 && (
+            {games.length > 0 && (
                 <div className="divide-y divide-zinc-800/80 overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/30">
-                    {MOCK_GAMES.map((game) => (
+                    {games.map((game) => (
                         <GameRow key={game._id} game={game} />
                     ))}
                 </div>

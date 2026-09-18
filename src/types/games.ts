@@ -39,7 +39,6 @@ export type Interest =
     | 'interested'
     | 'little-interested'
     | 'not-interested'
-    | 'na';
 
 export type OwnedState = 'physical' | 'digital' | 'emulator' |'wishlist';
 
@@ -86,6 +85,7 @@ export type Game = {
     genre: string,
     image: string,
     interest: Interest | null,
+    rating: string | null,
     progress: PlayState,
     progressDescription: string | null,
     onList: boolean,
@@ -107,7 +107,6 @@ export const INTEREST_CONFIG: Record<Interest, { label: string; color: string; w
     'very-interested': { label: 'Very Interested', color: 'text-yellow-500', weight: 4 },
     'interested': { label: 'Interested', color: 'text-green-500', weight: 3 },
     'not-interested': { label: 'Not Interested', color: 'text-gray-500', weight: 2 },
-    'na': { label: 'N/A', color: 'text-gray-500', weight: 1 },
     'little-interested': {
         label: 'Little Interested',
         color: 'text-blue-500',

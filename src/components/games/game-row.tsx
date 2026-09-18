@@ -38,15 +38,24 @@ export default function GameRow({ game }: GameRowProps) {
             </div>
 
             <div className="sm:w-1/5">
-                {game.interest ? (
+                {game.interest && (
                     <p className="text-xs font-medium capitalize text-zinc-400">
                         Interest
                         <span className="mt-1 block text-sm text-zinc-200">
                             {interestConfig?.label}
                         </span>
                     </p>
-                ) : (
-                    <p className="text-xs text-zinc-600">No interest rating</p>
+                )}
+            </div>
+
+            <div className="sm:w-1/5">
+                {game.rating !== null && (
+                    <p className="text-xs font-medium capitalize text-zinc-400">
+                        Rating
+                        <span className="mt-1 block text-sm text-zinc-200">
+                            {game.rating}
+                        </span>
+                    </p>
                 )}
             </div>
 
