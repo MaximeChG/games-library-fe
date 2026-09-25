@@ -40,7 +40,7 @@ export default async function Games() {
             {games.length > 0 && (
                 <div className="divide-y divide-zinc-800/80 overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/30">
                     {games.map((game) => (
-                        <GameRow key={game._id} game={game} />
+                        <GameRow key={game.id} game={game} />
                     ))}
                 </div>
             )}

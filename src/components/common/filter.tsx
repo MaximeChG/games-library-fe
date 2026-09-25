@@ -1,4 +1,5 @@
-import { PlayState, STATE_CONFIG } from "@/src/types/games";
+import { PlayState } from "@/src/types/games";
+import { STATE_CONFIG } from "@/src/types/configs";
 
 interface FilterProps {
   FilterArray: PlayState[];

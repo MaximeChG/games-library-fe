@@ -75,7 +75,7 @@ export type GameConsoles = [
 ];
 
 export type Game = {
-    _id?: string
+    id?: string
     title: string,
     sortTitle: string,
     series: string,
@@ -86,8 +86,8 @@ export type Game = {
     progress: PlayState,
     progressDescription: string | null,
     onList: boolean,
-    addedDate: Date,
-    modifiedDate: Date,
+    createdAt: Date,
+    updatedAt: Date,
 };
 
 export type GameConsoleDetails = {

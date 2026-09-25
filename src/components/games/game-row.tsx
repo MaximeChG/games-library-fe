@@ -1,5 +1,6 @@
 import { CalendarDays, Gamepad2 } from "lucide-react";
-import { INTEREST_CONFIG, STATE_CONFIG, type Game } from "@/src/types/games";
+import { type Game } from "@/src/types/games";
+import { STATE_CONFIG, INTEREST_CONFIG } from "@/src/types/configs";
 
 interface GameRowProps {
     game: Game;
@@ -36,32 +37,30 @@ export default function GameRow({ game }: GameRowProps) {
                     {stateConfig.label}
                 </span>
             </div>
-
-            <div className="sm:w-1/5">
-                {game.interest && (
+            {game.interest && (
+                <div className="sm:w-1/5">
                     <p className="text-xs font-medium capitalize text-zinc-400">
                         Interest
                         <span className="mt-1 block text-sm text-zinc-200">
                             {interestConfig?.label}
                         </span>
                     </p>
-                )}
-            </div>
-
-            <div className="sm:w-1/5">
-                {game.rating !== null && (
+                </div>
+            )}
+            {game.rating !== null && (
+                <div className="sm:w-1/5">
                     <p className="text-xs font-medium capitalize text-zinc-400">
                         Rating
                         <span className="mt-1 block text-sm text-zinc-200">
                             {game.rating}
                         </span>
                     </p>
-                )}
-            </div>
+                </div>
+            )}
 
             <p className="flex items-center gap-1.5 whitespace-nowrap text-xs text-zinc-500 sm:w-1/6 sm:justify-end">
                 <CalendarDays className="h-3.5 w-3.5" />
-                {game.addedDate.toLocaleDateString()}
+                {game.createdAt.toLocaleDateString()}
             </p>
         </div>
     );
