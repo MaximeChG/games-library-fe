@@ -1,8 +1,8 @@
-import { PlayState } from "@/src/types/games";
-import { STATE_CONFIG } from "@/src/types/configs";
-
 interface FilterProps {
-  FilterArray: PlayState[];
+  FilterArray: {
+        id: string,
+        displayName: string
+    }[];
 }
 
 export default function Filter({ FilterArray }: FilterProps) {
@@ -16,10 +16,10 @@ export default function Filter({ FilterArray }: FilterProps) {
         </button>
           {FilterArray.map((tab) => (
             <button
-              key={tab}
+              key={tab.id}
               className="rounded-lg px-3 py-2 text-xs font-semibold text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
             >
-              {STATE_CONFIG[tab].label}
+              {tab.displayName}
             </button>
           ))}
         </div>

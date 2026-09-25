@@ -1,4 +1,5 @@
 import { Game } from "../types/games";
+import { BASE_URL } from "../util/util";
 
 type GameApi = Omit<Game, "addedDate" | "modifiedDate"> & {
   createdAt: string;
@@ -12,7 +13,7 @@ const normalizeGame = (game: GameApi): Game => ({
 });
 
 export const GetGames = async (): Promise<Game[]> => {
-  const response = await fetch("http://localhost:8080/games");
+  const response = await fetch(`${BASE_URL}/games`);
   const games = await response.json();
 
   console.log(games);

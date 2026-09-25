@@ -8,28 +8,6 @@ export type PlayState =
     | 'na'
     | 'wishlist';
 
-export const PLAY_STATES: PlayState[] = [
-    'playing',
-    'backlog',
-    'paused',
-    'completed',
-    'dropped',
-    'finished',
-    'na',
-    'wishlist',
-];
-
-export const playStateCompletionWeight: Record<PlayState, number> = {
-    playing: 5,
-    backlog: 1,
-    paused: 3,
-    completed: 7,
-    dropped: 4,
-    finished: 6,
-    na: 2,
-    wishlist: 0,
-};
-
 export type Interest =
     | 'must-play'
     | 'very-interested'
