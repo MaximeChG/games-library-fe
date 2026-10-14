@@ -57,7 +57,6 @@ export type Game = {
     title: string,
     sortTitle: string,
     series: string,
-    genre: string,
     image: string,
     interest: Interest | null,
     rating: string | null,
@@ -73,6 +72,12 @@ export type GameConsoleDetails = {
     console: string,
     ownedState: OwnedState,
     releaseYear: number,
+    gameId: string, // Id of the game in the Game collection    
+};
+
+export type GameGenreDetails = {
+    _id?: string,
+    genre: string,
     gameId: string, // Id of the game in the Game collection    
 };
 
