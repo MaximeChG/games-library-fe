@@ -1,10 +1,9 @@
 'use client';
-import React, { useState, useMemo } from 'react';
-import { LayoutGrid, List, Search, Play, Pause, CheckCircle2, History, XCircle, SlidersHorizontal, ArrowUpRight } from 'lucide-react';
-import { PLAY_STATES, PlayState, STATE_CONFIG, } from "@/src/types/games";
-
-// Define strict types for the Game status mapping
-
+// This page is a visual prototype that uses sample games, not database records.
+import { useMemo, useState } from 'react';
+import { Search, SlidersHorizontal, ArrowUpRight } from 'lucide-react';
+import { STATE_CONFIG } from "@/src/types/configs";
+import { PLAY_STATES, type PlayState } from "@/src/types/games";
 
 interface Game {
   id: string;

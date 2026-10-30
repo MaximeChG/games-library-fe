@@ -1,83 +1,69 @@
-export type PlayState =
-    | 'playing'
-    | 'backlog'
-    | 'paused'
-    | 'completed'
-    | 'dropped'
-    | 'finished'
-    | 'na'
-    | 'wishlist';
+// These types describe game data shared between the form, API, and library.
+export const PLAY_STATES = [
+    "playing",
+    "backlog",
+    "paused",
+    "completed",
+    "dropped",
+    "finished",
+    "na",
+    "wishlist",
+] as const;
+
+export type PlayState = typeof PLAY_STATES[number];
 
 export type Interest =
-    | 'must-play'
-    | 'very-interested'
-    | 'interested'
-    | 'little-interested'
-    | 'not-interested'
+    | "must-play"
+    | "very-interested"
+    | "interested"
+    | "little-interested"
+    | "not-interested"
+    | "do-not-play";
 
-export type OwnedState = 'physical' | 'digital' | 'emulator' |'wishlist';
+export type OwnedState = "physical" | "digital" | "emulator" | "wishlist";
 
-export type GameConsoles = [
-    { key: 'steam', value: "Steam" },
-    { key: 'epicGames', value: "Epic Games" },
-    { key: 'pc', value: "PC" },
+export interface GameConsoleDetails {
+    console: string;
+    ownedState: OwnedState;
+    releaseYear: number | null;
+}
 
-    { key: 'nes', value: "NES" },
-    { key: 'nesMini', value: "NES Mini" },
-    { key: 'snesMini', value: "SNES Mini" },
-    { key: 'n64', value: "Nintendo 64" },
-    { key: 'gcn', value: "GameCube" },
-    { key: 'wii', value: "Wii" },
-    { key: 'wiiU', value: "Wii U" },
-    { key: 'switch', value: "Switch" },
-    { key: 'switch2', value: "Switch 2" },
-    { key: 'switchO', value: "Switch Online" },
-    { key: 'gb', value: "GameBoy" },
-    { key: 'gbc', value: "GameBoy Color" },
-    { key: 'gba', value: "GameBoy Advance" },
-    { key: 'nds', value: "Nintendo DS" },
-    { key: 'n3ds', value: "Nintendo 3DS" },
+export interface Game {
+    id: number;
+    title: string;
+    sortTitle: string;
+    series: string | null;
+    imageUrl: string | null;
+    genres: string[];
+    interest: Interest | null;
+    rating: string | null;
+    progress: PlayState;
+    progressDescription: string | null;
+    onList: boolean | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    consoles: GameConsoleDetails[];
+}
 
-    { key: 'ps1', value: "Playstation 1" },
-    { key: 'psMini', value: "Playstation Mini" },
-    { key: 'ps2', value: "Playstation 2" },
-    { key: 'ps3', value: "Playstation 3" },
-    { key: 'ps4', value: "Playstation 4" },
-    { key: 'ps5', value: "Playstation 5" },
-    { key: 'psn', value: "Playstation Network" },
-    { key: 'psp', value: "Playstion Portable" },
-    { key: 'pstv', value: "Playstation TV" },
-
-    { key: 'xbox', value: "Xbox" },
-    { key: 'xbox360', value: "Xbox 360" },
-];
-
-export type Game = {
-    id?: string
-    title: string,
-    sortTitle: string,
-    series: string,
-    image: string,
-    interest: Interest | null,
-    rating: string | null,
-    progress: PlayState,
-    progressDescription: string | null,
-    onList: boolean,
-    createdAt: Date,
-    updatedAt: Date,
+export type ReturnedGamePayload = Omit<Game, "createdAt" | "updatedAt"> & {
+    createdAt: string | null;
+    updatedAt: string | null;
 };
 
-export type GameConsoleDetails = {
-    _id?: string,
-    console: string,
-    ownedState: OwnedState,
-    releaseYear: number,
-    gameId: string, // Id of the game in the Game collection    
-};
-
-export type GameGenreDetails = {
-    _id?: string,
-    genre: string,
-    gameId: string, // Id of the game in the Game collection    
-};
-
+export interface CreateGamePayload {
+    title: string;
+    sortTitle: string;
+    series: string;
+    imageUrl: string;
+    genres: string[];
+    interest: string;
+    rating: string;
+    progress: string;
+    progressDescription: string;
+    onList: boolean;
+    consoles: {
+        consoleId: string;
+        ownedState: OwnedState;
+        releaseYear: number | null;
+    }[];
+}

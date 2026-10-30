@@ -1,12 +1,13 @@
-import { LucideIcon, Play, Pause, CheckCircle2, XCircle, SlidersHorizontal, Heart, History } from "lucide-react";
-import { Interest, PlayState } from "./games";
+// Display labels, colors, and icons keep status rendering consistent.
+import { type LucideIcon, Play, Pause, CheckCircle2, XCircle, SlidersHorizontal, Heart, History } from "lucide-react";
+import type { Interest, PlayState } from "./games";
 
-// Lets Map the interest levels to a numeric value and a color for display purposes
 export const INTEREST_CONFIG: Record<Interest, { label: string; color: string; weight: number }> = {
     'must-play': { label: 'Must Play', color: 'text-red-500', weight: 5 },
     'very-interested': { label: 'Very Interested', color: 'text-yellow-500', weight: 4 },
     'interested': { label: 'Interested', color: 'text-green-500', weight: 3 },
     'not-interested': { label: 'Not Interested', color: 'text-gray-500', weight: 2 },
+    'do-not-play': { label: 'Do Not Play', color: 'text-zinc-500', weight: 0 },
     'little-interested': {
         label: 'Little Interested',
         color: 'text-blue-500',
@@ -14,7 +15,6 @@ export const INTEREST_CONFIG: Record<Interest, { label: string; color: string; w
     }
 };
 
-// Map colors and icons structurally to State of Play categories
 export const STATE_CONFIG: Record<PlayState, { label: string; bg: string; text: string; dot: string; icon: LucideIcon }> = {
     playing: {
         label: 'Currently Playing',

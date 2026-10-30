@@ -1,3 +1,4 @@
+// The root layout loads shared fonts, metadata, styles, and navigation.
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-gray-900 text-purple-400">
-        <Header PageName="My Dashboard" />
+        <Header pageName="My Games Library" />
         {children}
       </body>
     </html>

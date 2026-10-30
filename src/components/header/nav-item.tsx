@@ -1,5 +1,6 @@
 'use client';
 
+// Highlight the navigation link that matches the current route.
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,8 +15,8 @@ export default function NavItem({ label, href }: NavItemProps) {
 
     return (
         <li
-            className={`rounded-md px-3 py-2 transition-colors hover:bg-purple-950 hover:text-purple-200 ${
-                isActive ? "bg-purple-800 text-white" : ""
+            className={`rounded-md px-3 py-2 transition-colors hover:bg-violet-950 hover:text-violet-200 ${
+                isActive ? "bg-violet-800 text-white" : ""
             }`}
         >
             <Link href={href} aria-current={isActive ? "page" : undefined}>

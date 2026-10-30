@@ -1,34 +1,32 @@
-import { Game, GameConsoleDetails } from "../types/games";
-import { BASE_URL } from "../util/util";
-
-type GameApi = Omit<Game, "addedDate" | "modifiedDate"> & {
-  createdAt: string;
-  updatedAt: string;
-};
-
-const normalizeGame = (game: GameApi): Game => ({
-  ...game,
-  createdAt: new Date(game.createdAt),
-  updatedAt: new Date(game.updatedAt),
-});
+// Game API calls live here so pages and components share one response contract.
+import type { CreateGamePayload, Game, ReturnedGamePayload } from "../types/games";
+import { BASE_URL, fetchJson, normalizeGame } from "../util/util";
 
 export const GetGames = async (): Promise<Game[]> => {
-  const response = await fetch(`${BASE_URL}/games`);
-  const games = await response.json();
-
-  console.log(games);
-
+  const games = await fetchJson<ReturnedGamePayload[]>(`${BASE_URL}/games`);
   return games.map(normalizeGame);
 };
 
-export const GetGenresForGame = async (gameId: string): Promise<string[]> => {
-  const response = await fetch(`${BASE_URL}/games/${gameId}/genres`);
-  const genres = await response.json();
-  return genres;
-};
+export const CreateGame = async (gameData: CreateGamePayload): Promise<void> => {
+  const response = await fetch(`${BASE_URL}/games`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(gameData),
+  });
 
-export const GetConsolesForGame = async (gameId: string): Promise<GameConsoleDetails[]> => {
-  const response = await fetch(`${BASE_URL}/games/${gameId}/consoles`);
-  const consoles = await response.json();
-  return consoles;
-}
+  if (!response.ok) {
+    const responseText = await response.text();
+    let message = `Failed to create game: ${response.status} ${response.statusText}`;
+
+    try {
+      const body = JSON.parse(responseText) as { message?: string };
+      message = body.message ?? message;
+    } catch {
+      if (responseText) message = responseText;
+    }
+
+    throw new Error(message);
+  }
+};

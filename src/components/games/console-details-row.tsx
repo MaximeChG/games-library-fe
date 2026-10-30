@@ -1,5 +1,6 @@
 'use client';
 
+// Expand one game's saved console details without making another API request.
 import { useId, useState, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import type { GameConsoleDetails } from "@/src/types/games";
@@ -36,7 +37,7 @@ export default function ConsoleDetailsRow({ consoles, children }: ConsoleDetails
 				<div id={detailsId} className="grid gap-2 border-t border-zinc-800 pt-4 sm:grid-cols-3">
 					{consoles.map((detail, index) => (
 						<div
-							key={detail._id ?? `${detail.console}-${index}`}
+							key={`${detail.console}-${index}`}
 							className="grid grid-cols-2 gap-3 rounded-lg bg-zinc-950/60 px-3 py-2.5 text-sm sm:grid-cols-3"
 						>
 							<span className="font-medium text-zinc-200">

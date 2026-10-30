@@ -1,17 +1,20 @@
+// A controlled search field lets its parent decide which records to filter.
 import { Search } from "lucide-react";
+import type { ChangeEvent } from "react";
 
 interface SearchInputProps {
   placeholder?: string;
   value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SearchInput({ placeholder, value, onChange }: SearchInputProps) {
+export default function SearchInput({ placeholder = "Search...", value, onChange }: SearchInputProps) {
     return (
          <div className="relative w-full lg:max-w-sm">
           <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
           <input
             type="text"
+            aria-label={placeholder}
             placeholder={placeholder}
             value={value}
             onChange={onChange}
